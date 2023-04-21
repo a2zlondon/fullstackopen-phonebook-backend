@@ -1,7 +1,16 @@
 const express = require('express')
+const morgan = require('morgan')
+
 const app = express()
 
 app.use(express.json())
+
+morgan.token('req-body', function (req, res) {
+    const body = JSON.stringify(req.body)
+    return body
+})
+
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :req-body'))
 
 let persons = [
     {
@@ -65,6 +74,7 @@ app.get('/info', (req, res) => {
 })
 
 app.get('/api/persons', (req, res) => {
+    // console.log('%cindex.js line:71 MORGAN', 'color: #007acc;', req);
     res.json(persons)
 })
 
