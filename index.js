@@ -26,6 +26,33 @@ let persons = [
     }
 ]
 
+const generateId = () => {
+    const ranId = Math.floor(Math.random() * 10000)
+    if(persons.filter(person => person.id !== ranId))
+        return ranId
+}
+
+app.post('/api/persons', (request, response) => {
+
+    const body = request.body
+
+    if ((!body.name)||(!body.number)) {
+        return response.status(400).json({
+            error: 'content missing'
+        })
+    }
+
+    const person = {
+        name: body.name,
+        number: body.number,
+        id: generateId(),
+    }
+
+    persons = persons.concat(person)
+
+    response.json(person)
+})
+
 app.get('/info', (req, res) => {
     let serverDate = new Date();
     res.send(`<div>Phonebook has info for ${persons.length} people</div><div>${serverDate}</div>`)
