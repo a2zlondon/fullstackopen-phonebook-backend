@@ -14,9 +14,6 @@ mongoose.connect(url)
         console.log('error connecting to MongoDB:', error.message)
     })
 
-//09-1234556 040-22334455 TRUE
-//1234556,1-22334455 10-22-334455 FALSE
-
 const personSchema = new mongoose.Schema({
     name: {
         type: String,
