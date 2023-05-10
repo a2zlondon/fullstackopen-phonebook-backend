@@ -33,11 +33,6 @@ app.use(cors())
 app.use(express.json())
 app.use(express.static('build'))
 
-app.get('/webhookendpoint/:id', (request, response) => {
-  console.log('received webhook ' + request.params.id)
-  response.send('received webhook ' + request.body)
-})
-
 app.get('/info', (request, response) => {
   let serverDate = new Date()
   console.log('info ' + request.params.id)
